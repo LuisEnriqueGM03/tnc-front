@@ -1,0 +1,452 @@
+@import 'tailwindcss';
+
+:root {
+  /* --- Superficies y Fondos Base (Negro Puro) --- */
+  --color-background: #000000;
+  --color-surface-abyss: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #131313;
+  --color-surface-hover: #1a1a1a;
+  --color-surface-active: #222222;
+
+  /* --- Textos y Foreground --- */
+  --color-foreground: #ffffff;
+  --color-foreground-muted: #cbd5e1;
+  --color-muted: #64748b;
+  --color-disabled: #334155;
+
+  /* --- Bordes y Delimitadores --- */
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-default: rgba(255, 255, 255, 0.12);
+  --color-border-glow: rgba(250, 204, 21, 0.45);
+  --color-border-cyan: rgba(139, 92, 246, 0.45);
+
+  /* --- Acentos Neón Cromáticos (Paleta Dual) --- */
+  --color-primary: #facc15;
+  --color-primary-bright: #facc15;
+  --color-secondary: #8b5cf6;
+  --color-cyan: #8b5cf6;
+  --color-magenta: #8b5cf6;
+  --color-purple: #8b5cf6;
+  --color-success: #facc15;
+  --color-warning: #8b5cf6;
+  --color-danger: #8b5cf6;
+  --color-discord: #5865f2;
+  --color-discord-hover: #4752c4;
+  --color-discord-active: #3c45a5;
+
+  /* --- Halos y Sombras Glow --- */
+  --glow-primary-sm: 0 0 6px rgba(250, 204, 21, 0.35), 0 0 12px rgba(250, 204, 21, 0.15);
+  --glow-primary-md: 0 0 14px rgba(250, 204, 21, 0.5), 0 0 28px rgba(250, 204, 21, 0.25);
+  --glow-primary-lg: 0 0 22px rgba(250, 204, 21, 0.7), 0 0 45px rgba(250, 204, 21, 0.4);
+  --glow-cyan-sm: 0 0 6px rgba(139, 92, 246, 0.35), 0 0 12px rgba(139, 92, 246, 0.15);
+  --glow-cyan-md: 0 0 14px rgba(139, 92, 246, 0.55), 0 0 30px rgba(139, 92, 246, 0.25);
+  --glow-magenta-md: 0 0 14px rgba(139, 92, 246, 0.55), 0 0 30px rgba(139, 92, 246, 0.25);
+  --glow-danger-md: 0 0 14px rgba(139, 92, 246, 0.55), 0 0 30px rgba(139, 92, 246, 0.25);
+  --glow-success-md: 0 0 14px rgba(250, 204, 21, 0.55), 0 0 30px rgba(250, 204, 21, 0.25);
+  --glow-text-primary: 0 0 8px rgba(250, 204, 21, 0.6), 0 0 16px rgba(250, 204, 21, 0.3);
+  --glow-text-cyan: 0 0 8px rgba(139, 92, 246, 0.6), 0 0 16px rgba(139, 92, 246, 0.3);
+  --glow-discord-md: 0 0 14px rgba(88, 101, 242, 0.55), 0 0 30px rgba(88, 101, 242, 0.25);
+  --glow-discord-lg: 0 0 20px rgba(88, 101, 242, 0.7), 0 0 42px rgba(88, 101, 242, 0.35);
+
+  /* --- Glassmorphism Táctico --- */
+  --glass-bg-subtle: rgba(0, 0, 0, 0.45);
+  --glass-bg: rgba(0, 0, 0, 0.72);
+  --glass-bg-dense: rgba(0, 0, 0, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-highlight: rgba(255, 255, 255, 0.18);
+  --glass-blur-sm: blur(8px);
+  --glass-blur-md: blur(16px);
+  --glass-blur-lg: blur(32px);
+
+  /* --- Tipografías --- */
+  --font-display: 'Orbitron', sans-serif;
+  --font-sans: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* --- Rejillas, Radios y Cinemática --- */
+  --grid-color: rgba(139, 92, 246, 0.04);
+  --grid-size: 32px;
+  --radius-tactical-xs: 2px;
+  --radius-tactical-sm: 4px;
+  --radius-tactical-md: 8px;
+  --ease-cyber-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-glitch: steps(3, end);
+  --duration-instant: 80ms;
+  --duration-snappy: 180ms;
+  --duration-smooth: 320ms;
+}
+
+/* --- Base Global --- */
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-background);
+  background-image: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.06), transparent 60%);
+  color: var(--color-foreground-muted);
+  font-family: var(--font-sans);
+  letter-spacing: 0.03em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(250, 204, 21, 0.3);
+  color: var(--color-foreground);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface-abyss);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-hover);
+  border-radius: var(--radius-tactical-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* --- Recorte de esquinas táctico (Chamfered Corners) --- */
+.clip-corner-br {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.clip-corner-tl-br {
+  clip-path: polygon(
+    12px 0,
+    100% 0,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    0 100%,
+    0 12px
+  );
+}
+
+.clip-corner-all {
+  clip-path: polygon(
+    8px 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    8px 100%,
+    0 calc(100% - 8px),
+    0 8px
+  );
+}
+
+/* --- Cristal ahumado con backdrop-filter --- */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-md);
+  -webkit-backdrop-filter: var(--glass-blur-md);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 1px 0 0 var(--glass-border-highlight);
+}
+
+/* --- Efectos Glow Directos --- */
+.glow-primary {
+  box-shadow: var(--glow-primary-md);
+}
+
+.glow-cyan {
+  box-shadow: var(--glow-cyan-md);
+}
+
+.glow-magenta {
+  box-shadow: var(--glow-magenta-md);
+}
+
+.glow-danger {
+  box-shadow: var(--glow-danger-md);
+}
+
+.glow-success {
+  box-shadow: var(--glow-success-md);
+}
+
+/* --- Tipografía HUD Display --- */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.font-sans-tech {
+  font-family: var(--font-sans);
+  letter-spacing: 0.03em;
+}
+
+.font-mono-data {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+/* --- Retículas y Esquinas HUD (Tactical HUD Corner Brackets) --- */
+.hud-brackets {
+  position: relative;
+}
+
+.hud-brackets::before,
+.hud-brackets::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--color-cyan);
+  pointer-events: none;
+  transition: all var(--duration-snappy) var(--ease-cyber-snap);
+}
+
+.hud-brackets::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--color-cyan);
+  border-left: 2px solid var(--color-cyan);
+}
+
+.hud-brackets::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--color-cyan);
+  border-right: 2px solid var(--color-cyan);
+}
+
+.hud-brackets:hover::before,
+.hud-brackets:hover::after {
+  width: 14px;
+  height: 14px;
+  border-color: var(--color-primary);
+  filter: drop-shadow(0 0 4px var(--color-primary));
+}
+
+/* --- Cuadrícula de Fondo Cibernética (Perspective Cyber Matrix) --- */
+.cyber-grid-bg {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 85%);
+}
+
+/* --- Resplandor Ambiental (Yellow Core / Purple Accent) --- */
+.bg-glow-primary {
+  background-image: radial-gradient(
+    circle at 50% -10%,
+    color-mix(in srgb, var(--color-primary) 14%, transparent),
+    transparent 60%
+  );
+}
+
+.bg-glow-secondary {
+  background-image: radial-gradient(
+    circle at 85% 100%,
+    color-mix(in srgb, var(--color-secondary) 10%, transparent),
+    transparent 55%
+  );
+}
+
+/* --- Líneas de Escaneo CRT y Trama Analógica (Scanline Overlay) --- */
+.scanlines-overlay {
+  position: relative;
+}
+
+.scanlines-overlay::after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* --- Distorsión Cromática y Glitch de Texto (RGB Split Effect) --- */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text:hover {
+  text-shadow:
+    -2px 0 0 rgba(139, 92, 246, 0.75),
+    2px 0 0 rgba(250, 204, 21, 0.75);
+  animation: glitch-anim 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 1px);
+  }
+  40% {
+    transform: translate(-1px, -1px);
+  }
+  60% {
+    transform: translate(2px, 0);
+  }
+  80% {
+    transform: translate(1px, 2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* --- Pulso Sonar de Estado y Telemetría LED (Sonar Pulse Indicator) --- */
+.status-pulse-online {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--color-success);
+  box-shadow: var(--glow-success-md);
+}
+
+.status-pulse-online::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background-color: var(--color-success);
+  animation: sonar-wave 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.status-pulse-offline {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--color-danger);
+  box-shadow: var(--glow-danger-md);
+}
+
+@keyframes sonar-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* --- Pulso de resplandor ambiental (neón de identidad) --- */
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-primary) 20%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-primary) 40%, transparent);
+  }
+}
+
+/* --- LED de estado (hereda el color del texto para cero hardcoding) --- */
+.led-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.led-dot-pulse {
+  position: relative;
+}
+
+.led-dot-pulse::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: currentColor;
+  animation: sonar-wave 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+/* --- Cursor de escaneo láser para inputs terminal --- */
+@keyframes laser-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- Animación de entrada (feedback / banners) --- */
+@utility animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Rayo láser de escaneo decorativo --- */
+@keyframes laser-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%,
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-laser-sweep {
+  animation: laser-sweep 3.5s ease-in-out infinite;
+}
+
+/* --- Adaptación para Accesibilidad (prefers-reduced-motion) --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scanlines-overlay::after {
+    display: none !important;
+  }
+}
