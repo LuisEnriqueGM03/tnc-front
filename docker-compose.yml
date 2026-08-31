@@ -1,3 +1,5 @@
+name: tnc-discordgang
+
 services:
   frontend:
     build:
