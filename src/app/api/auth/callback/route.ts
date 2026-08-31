@@ -3,8 +3,22 @@ import { getSessionCookieOptions, isValidJwt, SESSION_COOKIE_NAME } from '@/feat
 
 const DEFAULT_REDIRECT = '/dashboard';
 
+function getBaseUrl(request: NextRequest): string {
+  const forwardedHost =
+    request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+  const forwardedProto =
+    request.headers.get('x-forwarded-proto') ?? 'https';
+
+  if (forwardedHost) {
+    return `${forwardedProto}://${forwardedHost}`;
+  }
+
+  return request.nextUrl.origin;
+}
+
 function buildLoginRedirect(request: NextRequest, errorCode: string): NextResponse {
-  const loginUrl = new URL('/login', request.url);
+  const baseUrl = getBaseUrl(request);
+  const loginUrl = new URL('/login', baseUrl);
   loginUrl.searchParams.set('error', errorCode);
   return NextResponse.redirect(loginUrl);
 }
@@ -23,8 +37,10 @@ export function GET(request: NextRequest): NextResponse {
     return buildLoginRedirect(request, 'invalid_token');
   }
 
-  const destinationPath = nextPath && nextPath.startsWith('/') ? nextPath : DEFAULT_REDIRECT;
-  const destination = new URL(destinationPath, request.url);
+  const baseUrl = getBaseUrl(request);
+  const destinationPath =
+    nextPath && nextPath.startsWith('/') ? nextPath : DEFAULT_REDIRECT;
+  const destination = new URL(destinationPath, baseUrl);
 
   const response = NextResponse.redirect(destination);
   response.cookies.set(SESSION_COOKIE_NAME, token, getSessionCookieOptions());
